@@ -13,8 +13,10 @@ Hook up your Bluetooth LE iBBQ thermometer to MQTT with Python.
  - No added lead
 
 ## Prerequisites 
-bluepy - https://github.com/IanHarvey/bluepy
-Note this script is Python 3, so make sure you install the Py3 version of Bluepy.
+ - bluepy - https://github.com/IanHarvey/bluepy
+    - Note this script is Python 3, so make sure you install the Py3 version of Bluepy.
+ - paho-mqtt - https://pypi.org/project/paho-mqtt/
+    - `pip3 install paho-mqtt`
 
 ## Configuration
 Your iBBQ device should be detected automatically.  If more than one device is detected it will pick the one with the best signal strength.
