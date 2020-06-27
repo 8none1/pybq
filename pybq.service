@@ -6,3 +6,4 @@ Type=simple
 ExecStart=/usr/bin/python3 /home/pi/pybq/bbq.py
 RestartSec=30
 Restart=always
+User=pi

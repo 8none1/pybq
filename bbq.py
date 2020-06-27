@@ -23,7 +23,9 @@ You should log your temperatures to InfluxCloud using Telegraf to take the MQTT 
 from bluepy.btle import *
 import paho.mqtt.client as mqtt
 
-debug = True
+debug = True # Prints messages to stdout
+
+mqtt_client_ip = "192.168.42.100"
 
 # iBBQ static commands
 CREDENTIALS_MESSAGE  = bytearray.fromhex("21 07 06 05 04 03 02 01 b8 22 00 00 00 00 00")
@@ -107,12 +109,12 @@ def find_bbq_hwaddr():
     else:
         return None
 
-mqtt_client_ip = "192.168.42.100"
-mqtt_client_port = 1883
-
-mqtt_client = mqtt.Client()
-mqtt_client.connect(mqtt_client_ip, mqtt_client_port, 60)
-mqtt_client.loop_start()
+if mqtt_client_ip is not None:
+    mqtt_client = mqtt.Client()
+    mqtt_client.connect(mqtt_client_ip, 1883, 60)
+    mqtt_client.loop_start()
+else:
+    raise NameError("No MQTT Server configured")
 
 hwid = find_bbq_hwaddr()
 if hwid is not None:
