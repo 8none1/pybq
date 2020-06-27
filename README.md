@@ -3,7 +3,7 @@ Hook up your Bluetooth LE iBBQ thermometer to MQTT with Python.
 
 ### Features
  - Super simple set up, change one thing and you're done
- - Automatically discover and connect to support iBBQ devices.  e.g. Inkbird IBT-4XS
+ - Automatically discover and connect to supported iBBQ devices.  e.g. Inkbird IBT-4XS
  - Send the temperature data to an MQTT topic 
  - Supports multiple temperature probes automatically
  - Send the battery data to an MQTT topic.
