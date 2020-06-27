@@ -25,7 +25,8 @@ import paho.mqtt.client as mqtt
 
 debug = True # Prints messages to stdout. Once things are working set this to False
 
-mqtt_client_ip = "192.168.42.100"
+mqtt_client_ip = "192.168.42.100" # Change to the IP address of your MQTT server.  If you need an MQTT server, look at Mosquitto.
+temperature_units = "k" # Change to "f" or "c" if that's what you prefer.  Note - temperature logged to MQTT will also be converted.
 
 # iBBQ static commands
 CREDENTIALS_MESSAGE  = bytearray.fromhex("21 07 06 05 04 03 02 01 b8 22 00 00 00 00 00")
@@ -71,7 +72,13 @@ class DataDelegate(DefaultDelegate):
             logger(temps)
             for idx, item in enumerate(temps):
                 if item != 65526:
-                    send_mqtt("bbq/temperature/"+str(idx+1), int(item/10))
+                    item = item / 10
+                    if temperature_units == "f":
+                        item = item * 1.8 + 32
+                    if temperature_units == "k":
+                        # Science
+                        item = item + 273
+                    send_mqtt("bbq/temperature/"+str(idx+1), int(item))
 
         elif cHandle == 37:
             # this is battery data!
@@ -140,6 +147,12 @@ main_descriptors = main_service.getDescriptors()
 # Then we have to enable real time data collection
 settings_characteristic = main_service.getCharacteristics(CMD_UUID)[0]
 settings_characteristic.write(REALTIME_DATA_ENABLE, withResponse=True)
+
+# The device logs all temperature in degrees c, but we can fix that for you.  Here we change the display units, and in the DataDelegate function we convert the temps
+if temperature_units == "f":
+    settings_characteristic.write(UNITS_FAHRENHEIT, withResponse=True)
+else:
+    settings_characteristic.write(UNITS_CELSIUS, withResponse=True)
 
 # And we have to switch on notifications for the realtime characteristic.
 # UUID 2902 is the standard descriptor UUID for CCCD which we need to write to in order
