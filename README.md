@@ -34,5 +34,8 @@ No need to tell it the MAC address of your device.  (If you have to though, look
 ## But I don't want to run it as root!
 If you're seeing error messages about ```bluepy.btle.BTLEManagementError: Failed to execute management command 'le on' (code: 20, error: Permission Denied)``` then you need to run the script as root.  If you don't want to do that read this: https://github.com/IanHarvey/bluepy/issues/313
 
+## What sort of overhead does this have on a Pi Zero W?
+Not much.  According to `top` it uses about 1% CPU (usually less) and about 3% RAM.  A similar Node application would use more like 10% RAM - still not much, but pybq is less.  Or is it fewer?
+
 ## What am I supposed to do with MQTT temperature data?
 You should take a look at [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/).  It makes it really easy to take an MQTT topic and send it to InfluxDB Cloud.  Then you get those sweet charts you're looking for.
