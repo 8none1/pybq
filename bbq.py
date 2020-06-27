@@ -26,7 +26,7 @@ import paho.mqtt.client as mqtt
 debug = True # Prints messages to stdout. Once things are working set this to False
 
 mqtt_client_ip = "192.168.42.100" # Change to the IP address of your MQTT server.  If you need an MQTT server, look at Mosquitto.
-temperature_units = "k" # Change to "f" or "c" if that's what you prefer.  Note - temperature logged to MQTT will also be converted.
+temperature_units = "c" # Change to "f" or "c" if that's what you prefer.  Note - temperature logged to MQTT will also be converted.
 
 # iBBQ static commands
 CREDENTIALS_MESSAGE  = bytearray.fromhex("21 07 06 05 04 03 02 01 b8 22 00 00 00 00 00")
@@ -71,7 +71,7 @@ class DataDelegate(DefaultDelegate):
             # Note: "0xFF" or 65526 means the probe is not connected and so should be ignored.
             logger(temps)
             for idx, item in enumerate(temps):
-                if item != 65526:
+                if item != 65526: # This is what gets reported when the probe isn't plugged in.
                     item = item / 10
                     if temperature_units == "f":
                         item = item * 1.8 + 32
