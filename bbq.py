@@ -23,7 +23,7 @@ You should log your temperatures to InfluxCloud using Telegraf to take the MQTT 
 from bluepy.btle import *
 import paho.mqtt.client as mqtt
 
-debug = True # Prints messages to stdout
+debug = True # Prints messages to stdout. Once things are working set this to False
 
 mqtt_client_ip = "192.168.42.100"
 
