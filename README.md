@@ -39,3 +39,12 @@ Not much.  According to `top` it uses about 1% CPU (usually less) and about 3% R
 
 ## What am I supposed to do with MQTT temperature data?
 You should take a look at [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/).  It makes it really easy to take an MQTT topic and send it to InfluxDB Cloud.  Then you get those sweet charts you're looking for.
+
+## How do I install this systemd unit file?
+Have a look at this page: https://www.linode.com/docs/quick-answers/linux/start-service-at-boot/
+
+# For the future?
+I've got a couple of ideas for the future, but any pull requests are welcome.
+ - Low power mode.  It seems unnecessary to pull the temperature every second.  We could switch off the temperature updates, and then enable them once a minute, or once every five minutes to pull off one reading.  That should be good enough, and might save some power.
+ - Alerts.  Get a push notification when a certain temperature is reached.  I feel like this is probably better implemented in a seperate tool, perhaps something which just listens to MQTT and sends alerts.  But maybe it could work here.
+ 
