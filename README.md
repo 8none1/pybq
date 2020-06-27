@@ -39,6 +39,18 @@ Not much.  According to `top` it uses about 1% CPU (usually less) and about 3% R
 
 ## What am I supposed to do with MQTT temperature data?
 You should take a look at [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/).  It makes it really easy to take an MQTT topic and send it to InfluxDB Cloud.  Then you get those sweet charts you're looking for.
+Here's a Telegraf config snippet:
+```
+[[inputs.mqtt_consumer]]
+servers = ["tcp://192.168.42.100:1883"]
+topics = [
+  "bbq/battery",
+  "bbq/+/#"
+]
+data_format = "value"
+data_type = "integer"
+```
+
 
 ## How do I install this systemd unit file?
 Have a look at this page: https://www.linode.com/docs/quick-answers/linux/start-service-at-boot/
