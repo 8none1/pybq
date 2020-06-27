@@ -32,7 +32,7 @@ No need to tell it the MAC address of your device.  (If you have to though, look
  The script will end.  If you want to automatically start logging data again when you turn it back on, check out the included systemd service file.  It's much easier to just restart the script than deal with reconnecting and reinitalising.  The service file will restart bbq.py every 30 seconds.  That's probably fine. You might need to change the user part if the service file.
 
 ## But I don't want to run it as root!
-It's possible, but is probably a security risk: https://github.com/IanHarvey/bluepy/issues/313
+If you're seeing error messages about ```bluepy.btle.BTLEManagementError: Failed to execute management command 'le on' (code: 20, error: Permission Denied)``` then you need to run the script as root.  If you don't want to do that read this: https://github.com/IanHarvey/bluepy/issues/313
 
 ## What am I supposed to do with MQTT temperature data?
 You should take a look at [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/).  It makes it really easy to take an MQTT topic and send it to InfluxDB Cloud.  Then you get those sweet charts you're looking for.
