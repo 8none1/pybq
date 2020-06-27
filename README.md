@@ -3,6 +3,7 @@ Hook up your Bluetooth LE iBBQ thermometer to MQTT with Python.
 
 ### Features
  - Super simple set up, change one thing and you're done
+ - Supports easy switching between temperature formats
  - Automatically discover and connect to supported iBBQ devices.  e.g. Inkbird IBT-4XS
  - Send the temperature data to an MQTT topic 
  - Supports multiple temperature probes automatically
@@ -26,6 +27,7 @@ No need to tell it the MAC address of your device.  (If you have to though, look
  - Change the IP address of your MQTT server.  It's right there near the top of bbq.py, `mqtt_client_ip`.
  
 ### Things you might like to change
+ - Temperature units default to degrees C.  You can switch to F by simply editing the `temperature_units` at the top of the file.  This will change the on-unit display and the data which is sent to MQTT.
  - Change the MQTT topics that are used.  These are set in the `handleNotification` function in the `DataDelegate` class.
  
 ## What happens when I turn my thermometer off?
