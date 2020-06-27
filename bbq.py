@@ -50,7 +50,7 @@ def logger(message):
     if debug: print(message)
 
 def send_mqtt(topic, value):
-    logger(f"MQTT: Sending value: {value} to topic {topic}")
+    logger("MQTT: Sending value: %s to topic %s" % (value, topic))
     mqtt_client.publish(topic, value)
 
 class ScanDelegate(DefaultDelegate):
@@ -58,7 +58,7 @@ class ScanDelegate(DefaultDelegate):
         DefaultDelegate.__init__(self)
     def handleDiscovery(self, dev, isNewDev, isNewData):
         if isNewDev:
-            logger(f"Discovered device {dev.addr}")
+            logger("Discovered device %s" % (dev.addr))
 
 class DataDelegate(DefaultDelegate):
     def __init__(self):
@@ -71,7 +71,7 @@ class DataDelegate(DefaultDelegate):
             logger(temps)
             for idx, item in enumerate(temps):
                 if item != 65526:
-                    send_mqtt(f"bbq/temperature/{idx+1}",int(item/10))
+                    send_mqtt("bbq/temperature/"+str(idx+1), int(item/10))
 
         elif cHandle == 37:
             # this is battery data!
@@ -86,7 +86,7 @@ class DataDelegate(DefaultDelegate):
             logger(batt_percent)
 
         else:
-            logger(f"Unknown data received from handle {cHandle}: {data}")
+            logger("Unknown data received from handle %s: %s" % (cHandle, data))
 
         
 def find_bbq_hwaddr():
@@ -95,16 +95,16 @@ def find_bbq_hwaddr():
     devices = scanner.scan(10.0)
 
     for dev in devices:
-        logger(f"Device {dev.addr}, RSSI={dev.rssi}dB")
+        logger("Device %s, RSSI=%sdB" % (dev.addr, dev.rssi))
         for (adtype, desc, value) in dev.getScanData():
             if desc == "Complete Local Name" and value == "iBBQ":
                 bbqs[dev.rssi] = dev
-                logger(f"Found iBBQ device {value} at address {dev.addr}. RSSI {dev.rssi}")
+                logger("Found iBBQ device %s at address %s. RSSI %s" % (value, dev.addr, dev.rssi))
 
     # We should now have a dict of bbq devices, let's sort by rssi and choose the one with the best connection
     if len(bbqs) > 0:
         bbq = bbqs[sorted(bbqs.keys(), reverse=True)[0]].addr
-        logger(f"Using hwaddr {bbq}")
+        logger("Using hwaddr %s" % bbq)
         return bbq
     else:
         return None
@@ -169,9 +169,3 @@ except KeyboardInterrupt:
     bbq.disconnect()
 except BTLEDisconnectError:
     logger("Device has gone away..")
-
-
-
-
-
-
