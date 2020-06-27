@@ -9,7 +9,7 @@ Hook up your Bluetooth LE iBBQ thermometer to MQTT with Python.
  - Send the battery data to an MQTT topic
  - Lots of comments about how BTLE works to help you reimplement your own solution
  - Includes an example systemd service file so you can just switch on your thermometer and start logging
- - Runs great on a Raspberry Pi Zero
+ - Runs great on a Raspberry Pi Zero W
  - No added lead
 
 ## Prerequisites 
@@ -29,7 +29,7 @@ No need to tell it the MAC address of your device.  (If you have to though, look
  - Change the MQTT topics that are used.  These are set in the `handleNotification` function in the `DataDelegate` class.
  
 ## What happens when I turn my thermometer off?
- The script will end.  If you want to automatically start logging data again when you turn it back on, check out the included systemd service file.  It's much easier to just restart the script than deal with reconnecting and reinitalising.  The service file will restart bbq.py every 30 seconds.  That's probably fine. You might need to change the user part if the service file.
+ The script will end.  If you want to automatically start logging data again when you turn it back on, check out the included systemd service file.  It's much easier to just restart the script than deal with reconnecting and reinitalising.  The service file will restart bbq.py every 30 seconds.  That's probably fine. You might need to change the user part of the service file.
 
 ## But I don't want to run it as root!
 If you're seeing error messages about ```bluepy.btle.BTLEManagementError: Failed to execute management command 'le on' (code: 20, error: Permission Denied)``` then you need to run the script as root.  If you don't want to do that read this: https://github.com/IanHarvey/bluepy/issues/313
