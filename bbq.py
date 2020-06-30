@@ -25,7 +25,7 @@ import paho.mqtt.client as mqtt
 
 debug = True # Prints messages to stdout. Once things are working set this to False
 
-mqtt_client_ip = "192.168.42.100" # Change to the IP address of your MQTT server.  If you need an MQTT server, look at Mosquitto.
+mqtt_server_ip = "192.168.42.100" # Change to the IP address of your MQTT server.  If you need an MQTT server, look at Mosquitto.
 temperature_units = "c" # Change to "f" or "c" if that's what you prefer.  Note - temperature logged to MQTT will also be converted.
 
 # iBBQ static commands
@@ -116,9 +116,9 @@ def find_bbq_hwaddr():
     else:
         return None
 
-if mqtt_client_ip is not None:
+if mqtt_server_ip is not None:
     mqtt_client = mqtt.Client()
-    mqtt_client.connect(mqtt_client_ip, 1883, 60)
+    mqtt_client.connect(mqtt_server_ip, 1883, 60)
     mqtt_client.loop_start()
 else:
     raise NameError("No MQTT Server configured")
