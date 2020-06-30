@@ -24,7 +24,7 @@ Your iBBQ device should be detected automatically.  If more than one device is d
 No need to tell it the MAC address of your device.  (If you have to though, look where `hwid` is declared - instead of having it use `find_bbq_hwaddr()` just give it a string with a colon seperated MAC address.)
 
 ### Things you must change
- - Change the IP address of your MQTT server.  It's right there near the top of bbq.py, `mqtt_client_ip`.
+ - Change the IP address of your MQTT server.  It's right there near the top of bbq.py, `mqtt_server_ip`.
  
 ### Things you might like to change
  - Temperature units default to degrees C.  You can switch to F by simply editing the `temperature_units` at the top of the file.  This will change the on-unit display and the data which is sent to MQTT.
