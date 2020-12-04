@@ -35,9 +35,9 @@ UNITS_FAHRENHEIT     = bytearray.fromhex("02 01 00 00 00 00")
 UNITS_CELSIUS        = bytearray.fromhex("02 00 00 00 00 00")
 BATTERY_LEVEL        = bytearray.fromhex("08 24 00 00 00 00")
 # iBBQ static service
-MAIN_SERVICE         = 0xFFF0 # Service which provides the charactistics
+MAIN_SERVICE         = 0xFFF0 # Service which provides the characteristics 
 CCCD_UUID            = 0x2902 # We have to write here to enable notifications. bluepy doesn't do this for us. See the "show_all_descriptors" XXX Fix me
-# iBBQ static charcteristics
+# iBBQ static characteristics
 SETTINGS_RESULTS     = 0xFFF1
 PAIR_UUID            = 0xFFF2
 HISTORY_UUID         = 0xFFF3 # Don't know how this works, here for completeness
@@ -141,7 +141,7 @@ login_characteristic.write(CREDENTIALS_MESSAGE) # Send the magic bytes to login
 # Scan the device for all the services.  You don't seem to need to do both
 # of these, but you do _have_ to do one of them.  If you don't then the notifications
 # don't work and you won't get a temperature reading.  Doing both for the sake of it.
-bbq_charateristic = bbq.getCharacteristics()
+bbq_characteristic = bbq.getCharacteristics()
 main_descriptors = main_service.getDescriptors()
 
 # Then we have to enable real time data collection
