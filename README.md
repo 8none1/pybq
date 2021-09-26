@@ -18,7 +18,7 @@ It's probably best and easiest if you install these in a venv.
 
  - bluepy - https://github.com/IanHarvey/bluepy
     - Note this script is Python 3, so make sure you install the Py3 version of Bluepy.
-    - Install the `master` version from Git, it includes some fixes for the helper.
+    - I suggest that you build and install the `master` version from Git, it includes some fixes for the helper.  You need to have `libglib2.0-dev` installed, and then it's as easy as:
     - `python3 -m pip install git+https://github.com/IanHarvey/bluepy.git`
  - paho-mqtt - https://pypi.org/project/paho-mqtt/
     - `python3 -m pip install paho-mqtt`
