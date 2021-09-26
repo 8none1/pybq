@@ -39,6 +39,9 @@ No need to tell it the MAC address of your device.  (If you have to though, look
 
 ## But I don't want to run it as root!
 If you're seeing error messages about ```bluepy.btle.BTLEManagementError: Failed to execute management command 'le on' (code: 20, error: Permission Denied)``` then you need to run the script as root.  If you don't want to do that read this: https://github.com/IanHarvey/bluepy/issues/313
+You need to do:
+`sudo setcap 'cap_net_raw,cap_net_admin+eip' bluepy-helper`
+where `bluepy-helper` is the file which is built when you install bluepy from Git.
 
 ## What sort of overhead does this have on a Pi Zero W?
 Not much.  According to `top` it uses about 1% CPU (usually less) and about 3% RAM.  A similar Node application would use more like 10% RAM - still not much, but pybq is less.  Or is it fewer?
